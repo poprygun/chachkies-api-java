@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>io.microsamples.accelerator</groupId>
+    <artifactId>chachkies-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>chachkies-api-java</name>
+    <description>Accelerator Project - Spring Boot, Open API, Java</description>
+    <properties>
+        <java.version>11</java.version>
+        <springdoc-openapi-ui.version>1.5.10</springdoc-openapi-ui.version>
+        <swagger-core.version>2.1.10</swagger-core.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+<!--Open API Stuff-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jeasy</groupId>
+            <artifactId>easy-random-core</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+<!--                <version>5.2.1</version> has bug that forces additional dependency for not reason -->
+                <version>4.3.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/config/api.yml</inputSpec>
+                            <generatorName>spring</generatorName>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                                <apiSuffix>Chachkie</apiSuffix>
+                                <serviceInterface>true</serviceInterface>
+                                <enumPropertyNaming>UPPERCASE</enumPropertyNaming>
+                                <modelMutable>true</modelMutable>
+                                <interfaceOnly>true</interfaceOnly>
+                            </configOptions>
+                            <useSpringfox>false</useSpringfox>
+                            <invokerPackage>io.microsamples.accelerator.chachkies</invokerPackage>
+                            <groupId>io.microsamples.accelerator.chachkies</groupId>
+                            <apiPackage>io.microsamples.accelerator.chachkies.api</apiPackage>
+                            <modelPackage>io.microsamples.accelerator.chachkies.model</modelPackage>
+                            <generateApiTests>false</generateApiTests>
+                            <output>${project.build.directory}/generated-sources</output>
+                            <ignoreFileOverride>${project.basedir}/.openapi-generator-ignore</ignoreFileOverride>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
