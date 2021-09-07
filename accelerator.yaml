@@ -47,7 +47,7 @@ engine:
           substitutions:
             - text: "io.microsamples.accelerator.chachkies.api"
               with: "#generatedApiFilesPackage + '.api'"
-    - include: [ "pom.xml", "src/main/resources/application.yml" ]
+    - include: [ "pom.xml" ]
       chain:
         - type: ReplaceText
           substitutions:
