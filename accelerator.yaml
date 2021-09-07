@@ -35,13 +35,13 @@ accelerator:
 engine:
   merge:
     - include: [ "**" ]
-    - include: [ "kubernetes/*.yaml", "skaffold.yaml", "pom.xml", "skaffold.yaml" ]
+    - include: [ "kubernetes/*.yaml", "skaffold.yaml", "skaffold.yaml" ]
       chain:
         - type: ReplaceText
           substitutions:
             - text: chachkies-api
               with: "#artifactId"
-    - include: [ "src/main/java/**/Application.kt" ]
+    - include: [ "src/main/java/**/Application.java" ]
       chain:
         - type: ReplaceText
           substitutions:
@@ -55,6 +55,8 @@ engine:
               with: "#generatedApiFilesPackage"
             - text: Chachkie
               with: "#apiSuffix"
+            - text: chachkies-api
+              with: "#artifactId"
     - include: [ "src/main/java/**/ChachkiesApiImpl.java" ]
       chain:
         - type: ReplaceText
